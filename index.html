@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Be My Valentine 💖</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff5f9e, #ffc371);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 35px;
+            border-radius: 25px;
+            text-align: center;
+            width: 90%;
+            max-width: 420px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            font-size: 2.4rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            height: 150px;
+            position: relative;
+        }
+
+        button {
+            padding: 14px 32px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            position: absolute;
+            transition: 0.3s ease;
+        }
+
+        #yesBtn {
+            background: white;
+            color: #ff4b7d;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #yesBtn:hover {
+            transform: translateX(-50%) scale(1.15);
+        }
+
+        #noBtn {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .love {
+            font-size: 2rem;
+            animation: pop 0.6s ease forwards;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 24px;
+            animation: float 4s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        .gallery img {
+            width: 90px;
+            height: 90px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🎶 Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- FIRST SCREEN -->
+    <div class="container" id="main">
+        <h1>
+            Will you be my Valentine,
+            <span id="name">My Love</span>? 💘
+        </h1>
+
+        <p>
+            I promise laughter, comfort, adventures,<br>
+            and a heart that’s always yours ❤️<br><br>
+            Thank you for always being there for me<br>
+            I love you soo muchhh muchh ❤️❤️❤️
+        </p>
+
+        <p id="countdown" style="margin-top:10px;font-size:0.95rem;"></p>
+
+        <div class="buttons">
+            <button id="yesBtn">Yes 💖</button>
+            <button id="noBtn">No 😏</button>
+        </div>
+    </div>
+
+    <!-- YES SCREEN -->
+    <div class="container hidden" id="yesScreen">
+        <h1 class="love">YAYYY!!! 💕</h1>
+
+        <p>
+            You just made my world brighter ✨<br><br>
+            This Valentine’s Day is ours 🌹<br>
+            And honestly… every day after too 💞
+        </p>
+
+        <h3>Our Memories 💑</h3>
+
+        <div class="gallery">
+            <img src="photo1.JPG">
+            <img src="photo2.JPG">
+            <img src="photo3.JPG">
+        </div>
+
+        <button
+            id="openLetter"
+            style="
+                margin-top:20px;
+                padding:12px 28px;
+                border:none;
+                border-radius:25px;
+                font-size:1rem;
+                cursor:pointer;
+                background:white;
+                color:#ff4b7d;
+            ">
+            💌 Open My Heart
+        </button>
+
+        <div
+            id="letter"
+            class="hidden"
+            style="
+                margin-top:70px;
+                background:white;
+                color:#ff4b7d;
+                padding:20px;
+                border-radius:20px;
+                font-size:1.05rem;
+                animation: pop 0.5s ease;
+            ">
+            From the moment you came into my life,<br>
+            ordinary days turned special ✨<br><br>
+            This isn’t just Valentine’s Day…<br>
+            It’s the start of many beautiful tomorrows 💖<br><br>
+            Sorry for being annoying sometimes<br>
+            Sorry for being stupid,<br>
+            I love you forever my sweet princess 💖💖
+        </div>
+    </div>
+
+    <script>
+        // 👩 Change her name here
+        document.getElementById("name").innerText = "My Beloved Fatuuu";
+
+        // 😈 NO button trolling
+        const noBtn = document.getElementById("noBtn");
+
+        function escape() {
+            const padding = 120;
+            const x = Math.random() * (window.innerWidth - padding);
+            const y = Math.random() * (window.innerHeight - padding);
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+
+            noBtn.innerText = [
+                "No 🙃",
+                "Hehe 😏",
+                "Try again 😌",
+                "You want Yes 💖"
+            ][Math.floor(Math.random() * 4)];
+        }
+
+        noBtn.addEventListener("mouseover", escape);
+        noBtn.addEventListener("click", escape);
+
+        // 💖 YES button magic
+        const yesBtn = document.getElementById("yesBtn");
+        const main = document.getElementById("main");
+        const yesScreen = document.getElementById("yesScreen");
+        const music = document.getElementById("bgMusic");
+
+        yesBtn.addEventListener("click", () => {
+            main.classList.add("hidden");
+            yesScreen.classList.remove("hidden");
+            music.play();
+            startHearts();
+        });
+
+        // 💕 Floating hearts
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerText = "💖";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.bottom = "0";
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 4000);
+            }, 250);
+        }
+
+        // ⏳ Countdown
+        const countdown = document.getElementById("countdown");
+        const vDay = new Date("Feb 14, 2026 00:00:00").getTime();
+
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = vDay - now;
+
+            if (diff < 0) {
+                countdown.innerText = "It’s Valentine’s Day 💖";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            countdown.innerText = `${days} days left until our Valentine 💘`;
+        }, 1000);
+
+        // 💌 Love letter
+        document.getElementById("openLetter").addEventListener("click", () => {
+            document.getElementById("letter").classList.remove("hidden");
+        });
+    </script>
+
+</body>
+</html>
